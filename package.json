@@ -1,0 +1,33 @@
+{
+  "name": "@zeeis/velectron",
+  "version": "1.0.0",
+  "description": "Customized electron build with extra video codecs",
+  "main": "index.js",
+  "types": "electron.d.ts",
+  "scripts": {
+    "postinstall": "node install.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zeeis/velectron"
+  },
+  "keywords": [
+    "electron",
+    "video"
+  ],
+  "author": "RedBeanN",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zeeis/velectron/issues"
+  },
+  "homepage": "https://github.com/zeeis/velectron#readme",
+  "dependencies": {
+    "@electron/get": "^1.13.0",
+    "@types/node": "^16.9.6",
+    "axios": "^0.21.4",
+    "extract-zip": "^2.0.1"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  }
+}
