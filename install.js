@@ -41,7 +41,7 @@ else {
     process.exit(0);
   }
   const npmrc = fs.readFileSync(path.resolve(home, '.npmrc')).toString();
-  const matched = /_authToken=(.*)/.exec(npmrc);
+  const matched = /\/\/npm.pkg.github.com\/:_authToken=(.*)/.exec(npmrc);
   if (matched[1]) token = matched[1];
   if (!token || !token.length) {
     console.error('Cannot find your PAT, ensure you have setted $GITHUB_PAT or write it to ~/.npmrc');
