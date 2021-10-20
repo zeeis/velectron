@@ -32,11 +32,9 @@ else {
   }
 }
 const apiUrl = 'https://api.github.com/repos/zeeis/velectron/releases';
-console.log('TOKEN:', token);
 
 const version = require('./version');
 const download = async (url, dist, options) => {
-  console.log(url, dist);
   // electron-packager does not pass `options` to downloader
   // since velectron version is not matched to electron
   // we should replace `version` to correct one
