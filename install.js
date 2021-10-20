@@ -25,29 +25,6 @@ if (isInstalled()) {
   process.exit(0);
 }
 
-/**
- * TODO:
- * Currently needs a PAT(Personal Access Token) to
- * download assets since the repo is private.
- * These codes may removed in the future.
- */
-let token = '';
-if (process.env.GITHUB_PAT) token = process.env.GITHUB_PAT;
-else {
-  const home = process.env.HOME ||
-              (process.env.HOMEDRIVE ? process.env.HOMEDRIVE + process.env.HOMEPATH : undefined);
-  if (!home) {
-    console.error(`Cannot determine platform home directory. Pleaase set $GITHUB_PAT env`);
-    process.exit(0);
-  }
-  const npmrc = fs.readFileSync(path.resolve(home, '.npmrc')).toString();
-  const matched = /\/\/npm.pkg.github.com\/:_authToken=(.*)/.exec(npmrc);
-  if (matched[1]) token = matched[1];
-  if (!token || !token.length) {
-    console.error('Cannot find your PAT, ensure you have setted $GITHUB_PAT or write it to ~/.npmrc');
-    process.exit(0);
-  }
-}
 // downloads if not cached
 downloadArtifact({
   version,
@@ -59,11 +36,9 @@ downloadArtifact({
   mirrorOptions: {
     mirror: 'https://github.com/zeeis/velectron/releases/download/'
   },
-  downloadOptions: {
-    token,
-    apiUrl: 'https://api.github.com/repos/zeeis/velectron/releases',
-  },
   downloader,
+  // pass an empty option to tell downloader not to replace version
+  downloadOptions: {}
 }).then(extractFile).catch(err => {
   console.error(err.stack);
   process.exit(1);
