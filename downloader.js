@@ -56,7 +56,6 @@ const download = async (url, dist, options) => {
     const assets = (res.data.map(v => v.assets)).flat();
     for (const asset of assets) {
       if (asset.browser_download_url === url) {
-        console.log(asset.url);
         return axios({
           method: 'get',
           url: asset.url,
