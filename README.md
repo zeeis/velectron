@@ -37,3 +37,9 @@ npm publish
 ``` sh
 npm i -S @zeeis/velectron
 ```
+
+## `electron.d.ts`
+
+类型定义文件需要使用 `@electron/typescript-definitions` 生成
+
+参考 [Github 链接](https://github.com/electron/typescript-definitions4)
