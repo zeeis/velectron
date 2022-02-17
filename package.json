@@ -1,6 +1,6 @@
 {
   "name": "@zeeis/velectron",
-  "version": "1.0.3",
+  "version": "17.0.0-rc.1",
   "description": "Customized electron build with extra video codecs",
   "main": "index.js",
   "types": "electron.d.ts",

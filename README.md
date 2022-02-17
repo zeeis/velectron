@@ -42,4 +42,4 @@ npm i -S @zeeis/velectron
 
 类型定义文件需要使用 `@electron/typescript-definitions` 生成
 
-参考 [Github 链接](https://github.com/electron/typescript-definitions4)
+参考 [Github 链接](https://github.com/electron/typescript-definitions)

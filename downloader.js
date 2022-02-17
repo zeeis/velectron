@@ -17,19 +17,21 @@ const path = require('path');
 let token = '';
 if (process.env.GITHUB_PAT) token = process.env.GITHUB_PAT;
 else {
-  const home = process.env.HOME ||
-              (process.env.HOMEDRIVE ? process.env.HOMEDRIVE + process.env.HOMEPATH : undefined);
-  if (!home) {
-    console.error(`Cannot determine platform home directory. Pleaase set $GITHUB_PAT env`);
-    process.exit(0);
-  }
-  const npmrc = fs.readFileSync(path.resolve(home, '.npmrc')).toString();
-  const matched = /\/\/npm.pkg.github.com\/:_authToken=(.*)/.exec(npmrc);
-  if (matched[1]) token = matched[1];
-  if (!token || !token.length) {
-    console.error('Cannot find your PAT, ensure you have setted $GITHUB_PAT or write it to ~/.npmrc');
-    process.exit(0);
-  }
+  (() => {
+    const home = process.env.HOME ||
+                (process.env.HOMEDRIVE ? process.env.HOMEDRIVE + process.env.HOMEPATH : undefined);
+    if (!home) {
+      // console.error(`Cannot determine platform home directory. Pleaase set $GITHUB_PAT env`);
+      return;
+    }
+    const npmrc = fs.readFileSync(path.resolve(home, '.npmrc')).toString();
+    const matched = /\/\/npm.pkg.github.com\/:_authToken=(.*)/.exec(npmrc);
+    if (matched[1]) token = matched[1];
+    if (!token || !token.length) {
+      // console.warn('Cannot find your PAT, ensure you have setted $GITHUB_PAT or write it to ~/.npmrc. Otherwise you may not able to download.');
+      return;
+    }
+  })();
 }
 const apiUrl = 'https://api.github.com/repos/zeeis/velectron/releases';
 
@@ -41,12 +43,17 @@ const download = async (url, dist, options) => {
   if (!options) {
     url = url.replace(/v\d+\.\d+\.\d+/g, 'v' + version);
   }
-  if (!token || !apiUrl) {
-    throw new Error('Expect token and apiUrl');
+  // if (!token || !apiUrl) {
+  //   throw new Error('Expect token and apiUrl');
+  // }
+  // Skip authorize if token is not set.
+  // This will break installation if the velectron repo is private.
+  if (!token) {
+    console.log('No GITHUB_PAT was found. Assume the repo is public.')
   }
-  const headers = {
+  const headers = token.length ? {
     Authorization: `token ${token}`,
-  };
+  } : {};
   return axios({
     method: 'get',
     url: apiUrl,
