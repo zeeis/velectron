@@ -1,4 +1,5 @@
 dist
 .git
 .gitignore
+.github
 checksum.js
