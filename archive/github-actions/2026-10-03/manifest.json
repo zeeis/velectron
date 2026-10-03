@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "repository": "zeeis/velectron",
+  "repository_id": 411936826,
+  "date": "2026-10-03",
+  "source_sha": "f31fffebe0b411a66a0b953d52d138f86c116615",
+  "entries": [
+    {
+      "original_path": ".github/workflows/weekly.yml",
+      "archived_path": "archive/github-actions/2026-10-03/.github/workflows/weekly.yml",
+      "source_commit": "f31fffebe0b411a66a0b953d52d138f86c116615",
+      "source_blob_sha": "1eeb2aecc38a097d9982d155b1bfa6f3db5b521e",
+      "sha256": "a8591d577bbac18e9b41cc02613c0b0fbfa4032a020a5f0664d82f6c2395d86a",
+      "workflow_ids": [
+        19765233
+      ],
+      "business_consumer": "same repository baks/* branch snapshots; Git history already preserves every committed source revision",
+      "reason": "approved retirement of redundant scheduled same-repository branch backups",
+      "secret_names": [],
+      "dependencies": {
+        "actions": [
+          "actions/checkout@v2"
+        ],
+        "exclusive_local_helpers": [],
+        "note": "Workflow only runs inline date/git commands; no dedicated scripts/classes/dependency files."
+      },
+      "source_references": [
+        ".github/workflows/weekly.yml:11:      - '**/weekly.yml'"
+      ],
+      "restore": "Restore this exact archived file to its original .github/workflows path in a reviewed PR, then explicitly enable the workflow ID after confirming need and write permissions."
+    }
+  ],
+  "invariants": [
+    "No credentials included",
+    "Existing baks branches, releases and historical Actions runs remain available",
+    "No remaining executable callers reference retired entrypoints"
+  ],
+  "rollback": "Reviewed PR restoring archived workflows; re-enable disabled IDs only after validating real consumer."
+}
